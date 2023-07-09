@@ -19,7 +19,7 @@
   <li>Clone the repository:</li>
 </ol>
 
-<pre><code>git clone https://github.com/your-username/bank-transactions.git</code></pre>
+<pre><code>git clone https://github.com/dardanbakiu/bank-transactions.git</code></pre>
 
 <ol start="2">
   <li>Install the dependencies:</li>
