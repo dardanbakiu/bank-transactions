@@ -9,6 +9,7 @@ import {
   Get,
   NotFoundException,
   BadRequestException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
@@ -21,6 +22,20 @@ export class UserController {
   @HttpCode(HttpStatus.CREATED)
   async register(@Body() user: Partial<User>): Promise<User> {
     return this.userService.register(user);
+  }
+
+  @Post('login')
+  @HttpCode(HttpStatus.OK)
+  async login(
+    @Body() requestBody: { email: string; password: string },
+  ): Promise<{ accessToken: string }> {
+    const { email, password } = requestBody;
+    const user = await this.userService.validateUser(email, password);
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+    const accessToken = await this.userService.login(user);
+    return { accessToken };
   }
 
   @Get(':id')
