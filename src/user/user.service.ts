@@ -6,17 +6,39 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
-import * as bcrypt from 'bcryptjs';
+import { compare } from 'bcryptjs';
+import { AuthService } from './auth.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+
+    private authService: AuthService,
+    private jwtService: JwtService,
   ) {}
 
-  comparePasswords(password: string): Promise<boolean> {
-    return bcrypt.compare(password, password);
+  async comparePasswords(
+    plainTextPassword: string,
+    hashedPassword: string,
+  ): Promise<boolean> {
+    return compare(plainTextPassword, hashedPassword);
+  }
+
+  async validateUser(email: string, password: string): Promise<any> {
+    const user = await this.findByEmail(email);
+    if (user && (await this.comparePasswords(password, user.password))) {
+      const { password, ...result } = user; // Exclude password from the response
+      return result;
+    }
+    return null;
+  }
+
+  async login(user: any): Promise<string> {
+    const payload = { email: user.email, sub: user.id };
+    return this.jwtService.sign(payload);
   }
 
   register(user: Partial<User>): Promise<User> {
