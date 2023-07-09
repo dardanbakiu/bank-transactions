@@ -42,11 +42,20 @@ export class TransactionService {
   }
 
   async withdrawal(userId: number, amount: number): Promise<void> {
-    await this.validateTransactionData(userId, amount);
+    if (amount <= 0) {
+      throw new BadRequestException('Invalid withdrawal amount');
+    }
+
+    const balance = await this.getUserBalance(userId);
+
+    if (amount > balance) {
+      throw new BadRequestException('Insufficient balance');
+    }
 
     const transaction: Partial<Transaction> = {
       userId,
       amount: -amount,
+      isBonus: false,
     };
 
     await this.transactionRepository.save(transaction);
@@ -64,5 +73,24 @@ export class TransactionService {
     if (amount <= 0) {
       throw new BadRequestException('Invalid transaction amount');
     }
+  }
+
+  private async getUserBalance(userId: number): Promise<number> {
+    const depositTransactions = await this.transactionRepository.find({
+      where: {
+        userId,
+        isBonus: false,
+      },
+    });
+
+    const totalDeposits = depositTransactions
+      .filter((transaction) => transaction.amount > 0)
+      .reduce((total, transaction) => total + transaction.amount, 0);
+
+    const totalWithdrawals = depositTransactions
+      .filter((transaction) => transaction.amount < 0)
+      .reduce((total, transaction) => total - transaction.amount, 0);
+
+    return totalDeposits - totalWithdrawals;
   }
 }
