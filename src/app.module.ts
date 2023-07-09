@@ -13,6 +13,7 @@ import { User } from './user/user.entity';
       username: 'root',
       password: 'root',
       database: 'bank',
+      // entities: ['src/**/*.entity.ts'],
       entities: [User],
       synchronize: true,
     }),
