@@ -34,8 +34,10 @@ export class UserService {
     return this.jwtService.sign(payload);
   }
 
-  register(user: Partial<User>): Promise<User> {
-    const existingUser = this.userRepository.findOneBy({ email: user.email });
+  async register(user: Partial<User>): Promise<User> {
+    const existingUser = await this.userRepository.findOne({
+      where: { email: user.email },
+    });
     if (existingUser) {
       throw new ConflictException('Email already exists');
     }
@@ -49,11 +51,11 @@ export class UserService {
   }
 
   findById(id: number): Promise<User | null> {
-    return this.userRepository.findOneBy({ id });
+    return this.userRepository.findOne({ where: { id } });
   }
 
   findByEmail(email: string): Promise<User | null> {
-    return this.userRepository.findOneBy({ email });
+    return this.userRepository.findOne({ where: { email } });
   }
 
   async remove(id: number): Promise<void> {
