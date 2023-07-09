@@ -1,6 +1,6 @@
 <h1>Bank Transaction API Documentation</h1>
 
-<p>This is the documentation for the Bank Transaction RESTful API implemented using NestJS and TypeORM. The API allows users to perform bank transactions and calculates bonuses based on certain conditions. It provides various endpoints for user registration, authentication, bank transactions, and sorting users by bonuses. The API is secured using authentication mechanisms, and it utilizes a PostgreSQL database for data storage.</p>
+<p>This is the documentation for the Bank Transaction RESTful API implemented using NestJS and TypeORM. The API allows users to perform bank transactions and calculates bonuses based on certain conditions. It provides various endpoints for user registration, authentication, bank transactions, and sorting users by bonuses. The API is secured using authentication mechanisms, and it utilizes a MySQL database for data storage.</p>
 
 <h2>Getting Started</h2>
 
@@ -9,8 +9,8 @@
 <h3>Prerequisites</h3>
 
 <ul>
-  <li>Node.js (version 12 or above)</li>
-  <li>PostgreSQL database (running locally or accessible via connection string)</li>
+  <li>Node.js (version 18 or above)</li>
+  <li>MySQL database (running locally or accessible via connection string)</li>
 </ul>
 
 <h3>Installation</h3>
@@ -26,7 +26,7 @@
 </ol>
 
 <pre><code>cd bank-transaction-api
-npm install</code></pre>
+yarn install</code></pre>
 
 <ol start="3">
   <li>Configuration:</li>
@@ -42,17 +42,17 @@ npm install</code></pre>
 </ol>
 
 <ul>
-  <li>Create a PostgreSQL database with the specified name and credentials in the <code>.env</code> file.</li>
+  <li>Create a MySQL database with the specified name and credentials in the <code>.env</code> file.</li>
   <li>Run database migrations to create the necessary tables by executing the following command:</li>
 </ul>
 
-<pre><code>npm run typeorm migration:run</code></pre>
+<pre><code>yarn typeorm migration:run</code></pre>
 
 <ol start="5">
   <li>Start the application:</li>
 </ol>
 
-<pre><code>npm run start</code></pre>
+<pre><code>yarn start</code></pre>
 
 <p>The API will now be accessible at <code>http://localhost:3000</code>.</p>
 
@@ -92,10 +92,10 @@ npm install</code></pre>
 
 <h2>Database Integration</h2>
 
-<p>The API integrates with a PostgreSQL database using TypeORM. TypeORM manages the database schema and provides versioning capabilities. Database migrations are used to create the necessary tables and keep the schema up to date. If any changes are made to the entities, new migrations can be generated and applied using the following command:</p>
+<p>The API integrates with a MySQL database using TypeORM. TypeORM manages the database schema and provides versioning capabilities. Database migrations are used to create the necessary tables and keep the schema up to date. If any changes are made to the entities, new migrations can be generated and applied using the following command:</p>
 
-<pre><code>npm run typeorm migration:generate -- -n MigrationName
-npm run typeorm migration:run</code></pre>
+<pre><code>yarn typeorm migration:generate -- -n MigrationName
+yarn typeorm migration:run</code></pre>
 
 <h2>Swagger Documentation</h2>
 
