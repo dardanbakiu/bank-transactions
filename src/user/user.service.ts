@@ -2,7 +2,7 @@ import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
-import { compare } from 'bcryptjs';
+import { compare, hash } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -42,7 +42,13 @@ export class UserService {
       throw new ConflictException('Email already exists');
     }
 
-    const newUser = this.userRepository.create(user);
+    const hashedPassword = await hash(user.password, 10); // Hash the password
+
+    const newUser = this.userRepository.create({
+      ...user,
+      password: hashedPassword, // Use the hashed password
+    });
+
     return this.userRepository.save(newUser);
   }
 
