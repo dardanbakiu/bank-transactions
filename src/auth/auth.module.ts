@@ -7,11 +7,11 @@ import { JwtStrategy } from './jwt.strategy';
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: 'your-secret-key', // replace with your actual secret key
+      secret: 'your-secret-key',
       signOptions: { expiresIn: '2h' },
     }),
   ],
   providers: [JwtStrategy],
-  exports: [JwtModule, PassportModule, JwtStrategy],  // Export JwtModule and JwtStrategy if they are used in other modules
+  exports: [JwtModule, PassportModule, JwtStrategy],
 })
 export class AuthModule { }

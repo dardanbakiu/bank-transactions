@@ -48,11 +48,11 @@ export class UserService {
       throw new ConflictException('Email already exists');
     }
 
-    const hashedPassword = await hash(user.password, 10); // Hash the password
+    const hashedPassword = await hash(user.password, 10);
 
     const newUser = this.userRepository.create({
       ...user,
-      password: hashedPassword, // Use the hashed password
+      password: hashedPassword,
     });
 
     return this.userRepository.save(newUser);

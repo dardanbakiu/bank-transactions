@@ -1,4 +1,3 @@
-// transaction.controller.ts
 import {
   Controller,
   Post,
@@ -10,7 +9,8 @@ import {
 } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiBody } from '@nestjs/swagger';
+import { TransactionDto } from './transaction.dto';
 
 interface UserRequest extends Request {
   user: any;
@@ -24,9 +24,10 @@ export class TransactionController {
   @UseGuards(AuthGuard('jwt'))
   @Post('deposit')
   @HttpCode(HttpStatus.CREATED)
+  @ApiBody({ type: TransactionDto })
   async deposit(
     @Req() req: UserRequest,
-    @Body() body: { amount: number },
+    @Body() body: TransactionDto,
   ): Promise<void> {
     await this.transactionService.deposit(req.user.userId, body.amount);
   }
@@ -34,9 +35,10 @@ export class TransactionController {
   @UseGuards(AuthGuard('jwt'))
   @Post('withdrawal')
   @HttpCode(HttpStatus.CREATED)
+  @ApiBody({ type: TransactionDto })
   async withdrawal(
     @Req() req: UserRequest,
-    @Body() body: { amount: number },
+    @Body() body: TransactionDto,
   ): Promise<void> {
     await this.transactionService.withdrawal(req.user.userId, body.amount);
   }

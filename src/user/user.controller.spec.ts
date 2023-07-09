@@ -27,7 +27,7 @@ describe('UserController', () => {
       providers: [
         {
           provide: UserService,
-          useClass: MockUserService, // Use the mock user service for testing
+          useClass: MockUserService,
         },
       ],
     }).compile();
