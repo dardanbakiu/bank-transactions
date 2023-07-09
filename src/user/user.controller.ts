@@ -14,7 +14,7 @@ import {
 import { UserService } from './user.service';
 import { User } from './user.entity';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateUserDto } from './user-create.dto';
+import { CreateUserDto, LoginDto } from './user.dto';
 
 @ApiTags('Users')
 @Controller('user')
@@ -31,9 +31,7 @@ export class UserController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  async login(
-    @Body() requestBody: { email: string; password: string },
-  ): Promise<{ accessToken: string }> {
+  async login(@Body() requestBody: LoginDto): Promise<{ accessToken: string }> {
     const { email, password } = requestBody;
     const user = await this.userService.validateUser(email, password);
     if (!user) {
