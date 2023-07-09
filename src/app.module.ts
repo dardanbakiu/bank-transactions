@@ -17,7 +17,6 @@ import { UserService } from './user/user.service';
       password: 'root',
       database: 'bank',
       entities: ['dist/**/*{.ts,.js}'],
-      // entities: [User],
       synchronize: true,
     }),
     UserModule,
