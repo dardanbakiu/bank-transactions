@@ -38,12 +38,12 @@ export class UserController {
     return { accessToken };
   }
 
-  @Get(':id')
-  async findById(@Param('id') id: number): Promise<User> {
-    const user = await this.userService.findById(id);
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-    return user;
-  }
+  // @Get(':id')
+  // async findById(@Param('id') id: number): Promise<User> {
+  //   const user = await this.userService.findById(id);
+  //   if (!user) {
+  //     throw new NotFoundException('User not found');
+  //   }
+  //   return user;
+  // }
 }

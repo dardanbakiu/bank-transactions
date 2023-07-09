@@ -16,8 +16,8 @@ import { UserService } from './user/user.service';
       username: 'root',
       password: 'root',
       database: 'bank',
-      // entities: ['src/**/*.entity.ts'],
-      entities: [User],
+      entities: ['dist/**/*{.ts,.js}'],
+      // entities: [User],
       synchronize: true,
     }),
     UserModule,
@@ -25,4 +25,4 @@ import { UserService } from './user/user.service';
   controllers: [AppController, UserController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
