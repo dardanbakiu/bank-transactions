@@ -1,13 +1,8 @@
-import {
-  Injectable,
-  NotFoundException,
-  ConflictException,
-} from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { compare } from 'bcryptjs';
-import { AuthService } from './auth.service';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -15,8 +10,6 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-
-    private authService: AuthService,
     private jwtService: JwtService,
   ) {}
 
