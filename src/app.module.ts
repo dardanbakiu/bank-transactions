@@ -6,21 +6,10 @@ import { User } from './user/user.entity';
 import { UserModule } from './user/user.module';
 import { UserController } from './user/user.controller';
 import { UserService } from './user/user.service';
+import { dataSourceOptions } from 'db/data-source';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'bank',
-      entities: ['dist/**/*{.ts,.js}'],
-      synchronize: true,
-    }),
-    UserModule,
-  ],
+  imports: [TypeOrmModule.forRoot(dataSourceOptions), UserModule],
   controllers: [AppController, UserController],
   providers: [AppService],
 })
