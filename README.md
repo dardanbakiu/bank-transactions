@@ -1,73 +1,124 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+<h1>Bank Transaction API Documentation</h1>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<p>This is the documentation for the Bank Transaction RESTful API implemented using NestJS and TypeORM. The API allows users to perform bank transactions and calculates bonuses based on certain conditions. It provides various endpoints for user registration, authentication, bank transactions, and sorting users by bonuses. The API is secured using authentication mechanisms, and it utilizes a MySQL database for data storage.</p>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<h2>Getting Started</h2>
 
-## Description
+<p>To run the API locally, follow the steps below:</p>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+<h3>Prerequisites</h3>
 
-## Installation
+<ul>
+  <li>Node.js (version 18 or above)</li>
+  <li>MySQL database (running locally or accessible via connection string)</li>
+</ul>
 
-```bash
-$ yarn install
-```
+<h3>Installation</h3>
 
-## Running the app
+<ol>
+  <li>Clone the repository:</li>
+</ol>
 
-```bash
-# development
-$ yarn run start
+<pre><code>git clone https://github.com/your-username/bank-transaction-api.git</code></pre>
 
-# watch mode
-$ yarn run start:dev
+<ol start="2">
+  <li>Install the dependencies:</li>
+</ol>
 
-# production mode
-$ yarn run start:prod
-```
+<pre><code>cd bank-transaction-api
+yarn install</code></pre>
 
-## Test
+<ol start="3">
+  <li>Configuration:</li>
+</ol>
 
-```bash
-# unit tests
-$ yarn run test
+<ul>
+  <li>Rename the <code>.env.example</code> file to <code>.env</code>.</li>
+  <li>Update the values in the <code>.env</code> file to match your local environment configuration, including the database connection details.</li>
+</ul>
 
-# e2e tests
-$ yarn run test:e2e
+<ol start="4">
+  <li>Database Setup:</li>
+</ol>
 
-# test coverage
-$ yarn run test:cov
-```
+<ul>
+  <li>Create a MySQL database with the specified name and credentials in the <code>.env</code> file.</li>
+  <li>Run database migrations to create the necessary tables by executing the following command:</li>
+</ul>
 
-## Support
+<pre><code>sudo yarn migration:run</code></pre>
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+<ol start="5">
+  <li>Start the application:</li>
+</ol>
 
-## Stay in touch
+<pre><code>yarn start</code></pre>
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+<p>The API will now be accessible at <code>http://localhost:3000</code>.</p>
 
-## License
+<h2>API Endpoints</h2>
 
-Nest is [MIT licensed](LICENSE).
+<p>The API exposes the following endpoints:</p>
+
+<h3>Authentication</h3>
+
+<ul>
+  <li><code>POST /user/register</code> - Register a new user.</li>
+  <li><code>POST /user/login</code> - Log in and retrieve an access token.</li>
+</ul>
+
+<h3>Bank Transactions</h3>
+
+<ul>
+  <li><code>POST /transaction/deposit</code> - Perform a deposit transaction.</li>
+  <li><code>POST /transaction/withdrawal</code> - Perform a withdrawal transaction.</li>
+</ul>
+
+<h3>Sorting Users</h3>
+
+<ul>
+  <li><code>GET /user/bonus</code> - Get a sorted list of users based on their bonus balances.</li>
+</ul>
+
+<h2>Authentication and Authorization</h2>
+
+<p>The API uses JSON Web Tokens (JWT) for authentication. When a user successfully logs in, an access token is generated and returned in the response. This access token should be included in the <code>Authorization</code> header for subsequent authenticated requests in the format: <code>Bearer &lt;access_token&gt;</code>.</p>
+
+<p>To access the protected endpoints, the requests must include a valid access token. If the token is missing or invalid, the API will respond with an appropriate error.</p>
+
+<h2>Error Handling</h2>
+
+<p>The API provides detailed error responses in case of any failures or invalid requests. Error responses include appropriate status codes and error messages to help identify and resolve the issues. Examples of possible errors include invalid transactions, insufficient balance, unauthorized access, or validation failures.</p>
+
+<h2>Database Integration</h2>
+
+<p>The API integrates with a MySQL database using TypeORM. TypeORM manages the database schema and provides versioning capabilities. Database migrations are used to create the necessary tables and keep the schema up to date. If any changes are made to the entities, new migrations can be generated and applied using the following command:</p>
+
+<pre><code>sudo yarn migration:generate -- db/migrations/{MigrationName}
+sudo yarn migration:run</code></pre>
+
+<h2>Swagger Documentation</h2>
+
+<p>Swagger documentation is available for the API. After starting the application, you can access the Swagger UI at <code>http://localhost:3000/api</code>. The Swagger UI provides an interactive interface to explore the API endpoints, view request/response schemas, and test the API directly.</p>
+
+<h2>Additional Information</h2>
+
+<ul>
+  <li>The API follows RESTful principles and utilizes appropriate HTTP methods for each endpoint.</li>
+  <li>Input data is validated and sanitized to prevent security vulnerabilities such as SQL injection and cross-site scripting.</li>
+  <li>Design patterns and coding best practices are followed to ensure a clean and maintainable codebase.</li>
+</ul>
+
+<h2>Contributing</h2>
+
+<p>If you would like to contribute to the development of this project, please follow the guidelines specified in the CONTRIBUTING.md file.</p>
+
+<h2>License</h2>
+
+<p>This project is licensed under the <a href="https://opensource.org/licenses/MIT">MIT License</a>. Feel free to use and modify the code according to your needs.</p>
+
+<h2>Contact</h2>
+
+<p>If you have any questions or suggestions regarding this API, please contact <a href="mailto:your-email@example.com">your-name</a>.</p>
+
+<p><strong>Note:</strong> Replace "your-username" and "your-name" with your GitHub username and name, respectively, in the URLs and contact information provided above.</p>
