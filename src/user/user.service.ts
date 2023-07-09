@@ -62,19 +62,13 @@ export class UserService {
     const users = await this.userRepository.find();
     const usersWithBonus: UserWithBonus[] = users.map(user => ({
       ...user,
-      bonus: 0 // initialize bonus with 0
+      bonus: 0,
     }));
 
-    for (let user of usersWithBonus) {
+    for (const user of usersWithBonus) {
       user.bonus = await this.transactionService.getUserBonus(user.id);
     }
     return usersWithBonus.sort((a, b) => a.bonus - b.bonus);
-  }
-
-
-
-  findAll(): Promise<User[]> {
-    return this.userRepository.find();
   }
 
   findById(id: number): Promise<User | null> {

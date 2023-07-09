@@ -16,7 +16,7 @@ import { User } from './user.entity';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
@@ -38,12 +38,8 @@ export class UserController {
     return { accessToken };
   }
 
-  // @Get(':id')
-  // async findById(@Param('id') id: number): Promise<User> {
-  //   const user = await this.userService.findById(id);
-  //   if (!user) {
-  //     throw new NotFoundException('User not found');
-  //   }
-  //   return user;
-  // }
+  @Get('bonus')
+  async getUsersSortedByBonus(): Promise<User[]> {
+    return this.userService.getUsersSortedByBonus();
+  }
 }

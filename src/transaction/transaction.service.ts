@@ -45,19 +45,15 @@ export class TransactionService {
     if (amount <= 0) {
       throw new BadRequestException('Invalid withdrawal amount');
     }
-
     const balance = await this.getUserBalance(userId);
-
     if (amount > balance) {
       throw new BadRequestException('Insufficient balance');
     }
-
     const transaction: Partial<Transaction> = {
       userId,
       amount: -amount,
       isBonus: false,
     };
-
     await this.transactionRepository.save(transaction);
   }
 

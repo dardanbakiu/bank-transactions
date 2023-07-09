@@ -1,3 +1,4 @@
+// transaction.controller.ts
 import {
   Controller,
   Post,
@@ -5,9 +6,14 @@ import {
   HttpCode,
   HttpStatus,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
 import { AuthGuard } from '@nestjs/passport';
+
+interface UserRequest extends Request {
+  user: any; // Or replace 'any' with the actual shape of your User object if you wish
+}
 
 @Controller('transaction')
 export class TransactionController {
@@ -17,17 +23,19 @@ export class TransactionController {
   @Post('deposit')
   @HttpCode(HttpStatus.CREATED)
   async deposit(
-    @Body() body: { userId: number; amount: number },
+    @Req() req: UserRequest,
+    @Body() body: { amount: number },
   ): Promise<void> {
-    await this.transactionService.deposit(body.userId, body.amount);
+    await this.transactionService.deposit(req.user.userId, body.amount);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Post('withdrawal')
   @HttpCode(HttpStatus.CREATED)
   async withdrawal(
-    @Body() body: { userId: number; amount: number },
+    @Req() req: UserRequest,
+    @Body() body: { amount: number },
   ): Promise<void> {
-    await this.transactionService.withdrawal(body.userId, body.amount);
+    await this.transactionService.withdrawal(req.user.userId, body.amount);
   }
 }
