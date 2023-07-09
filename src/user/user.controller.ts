@@ -4,11 +4,7 @@ import {
   Body,
   HttpCode,
   HttpStatus,
-  Put,
-  Param,
   Get,
-  NotFoundException,
-  BadRequestException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
