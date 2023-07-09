@@ -100,25 +100,3 @@ sudo yarn migration:run</code></pre>
 <h2>Swagger Documentation</h2>
 
 <p>Swagger documentation is available for the API. After starting the application, you can access the Swagger UI at <code>http://localhost:3000/api</code>. The Swagger UI provides an interactive interface to explore the API endpoints, view request/response schemas, and test the API directly.</p>
-
-<h2>Additional Information</h2>
-
-<ul>
-  <li>The API follows RESTful principles and utilizes appropriate HTTP methods for each endpoint.</li>
-  <li>Input data is validated and sanitized to prevent security vulnerabilities such as SQL injection and cross-site scripting.</li>
-  <li>Design patterns and coding best practices are followed to ensure a clean and maintainable codebase.</li>
-</ul>
-
-<h2>Contributing</h2>
-
-<p>If you would like to contribute to the development of this project, please follow the guidelines specified in the CONTRIBUTING.md file.</p>
-
-<h2>License</h2>
-
-<p>This project is licensed under the <a href="https://opensource.org/licenses/MIT">MIT License</a>. Feel free to use and modify the code according to your needs.</p>
-
-<h2>Contact</h2>
-
-<p>If you have any questions or suggestions regarding this API, please contact <a href="mailto:your-email@example.com">your-name</a>.</p>
-
-<p><strong>Note:</strong> Replace "your-username" and "your-name" with your GitHub username and name, respectively, in the URLs and contact information provided above.</p>
