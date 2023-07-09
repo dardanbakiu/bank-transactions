@@ -20,21 +20,25 @@ export class TransactionService {
   async deposit(userId: number, amount: number): Promise<void> {
     await this.validateTransactionData(userId, amount);
 
-    const user = await this.userRepository.findOne({ where: { id: userId } });
-
-    if (amount > 100) {
-      // const bonus = amount * 0.05;
-      // user.bonusBalance += bonus;
-      // await this.userRepository.save(user);
-      // amount += bonus;
-    }
-
     const transaction: Partial<Transaction> = {
       userId,
       amount,
+      isBonus: false,
     };
 
     await this.transactionRepository.save(transaction);
+
+    if (amount > 100) {
+      const bonusAmount = amount * 0.05;
+
+      const bonusTransaction: Partial<Transaction> = {
+        userId,
+        amount: bonusAmount,
+        isBonus: true,
+      };
+
+      await this.transactionRepository.save(bonusTransaction);
+    }
   }
 
   async withdrawal(userId: number, amount: number): Promise<void> {
