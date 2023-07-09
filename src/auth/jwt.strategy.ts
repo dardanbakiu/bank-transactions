@@ -26,6 +26,8 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -38,9 +40,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    // You could do some checks here...
-    // if check fails, you can throw an UnauthorizedException:
-    // throw new UnauthorizedException();
     return { userId: payload.sub, username: payload.username };
   }
 }

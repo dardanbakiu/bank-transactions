@@ -5,13 +5,15 @@ import { UserController } from './user.controller';
 import { User } from './user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { TransactionModule } from '../transaction/transaction.module';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
     TransactionModule,
     JwtModule.register({
-      secret: process.env.SECRET_KEY || 'default-secret',
+      secret: process.env.SECRET_KEY,
       signOptions: {
         expiresIn: '2h',
       },
