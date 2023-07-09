@@ -19,13 +19,13 @@
   <li>Clone the repository:</li>
 </ol>
 
-<pre><code>git clone https://github.com/your-username/bank-transaction-api.git</code></pre>
+<pre><code>git clone https://github.com/your-username/bank-transactions.git</code></pre>
 
 <ol start="2">
   <li>Install the dependencies:</li>
 </ol>
 
-<pre><code>cd bank-transaction-api
+<pre><code>cd bank-transactions
 yarn install</code></pre>
 
 <ol start="3">
