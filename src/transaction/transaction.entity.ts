@@ -12,6 +12,9 @@ export class Transaction {
   @Column()
   amount: number;
 
+  @Column({ default: false })
+  isBonus: boolean;
+
   @CreateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',
@@ -23,5 +26,6 @@ export class Transaction {
     default: () => 'CURRENT_TIMESTAMP(6)',
     onUpdate: 'CURRENT_TIMESTAMP(6)',
   })
+
   public updated_at: Date;
 }
