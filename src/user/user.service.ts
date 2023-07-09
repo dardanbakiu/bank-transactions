@@ -4,6 +4,11 @@ import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { compare, hash } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
+import { TransactionService } from '../transaction/transaction.service';
+
+interface UserWithBonus extends User {
+  bonus: number;
+}
 
 @Injectable()
 export class UserService {
@@ -11,7 +16,8 @@ export class UserService {
     @InjectRepository(User)
     private userRepository: Repository<User>,
     private jwtService: JwtService,
-  ) {}
+    private transactionService: TransactionService,
+  ) { }
 
   async comparePasswords(
     plainTextPassword: string,
@@ -51,6 +57,21 @@ export class UserService {
 
     return this.userRepository.save(newUser);
   }
+
+  async getUsersSortedByBonus(): Promise<UserWithBonus[]> {
+    const users = await this.userRepository.find();
+    const usersWithBonus: UserWithBonus[] = users.map(user => ({
+      ...user,
+      bonus: 0 // initialize bonus with 0
+    }));
+
+    for (let user of usersWithBonus) {
+      user.bonus = await this.transactionService.getUserBonus(user.id);
+    }
+    return usersWithBonus.sort((a, b) => a.bonus - b.bonus);
+  }
+
+
 
   findAll(): Promise<User[]> {
     return this.userRepository.find();

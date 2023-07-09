@@ -4,10 +4,12 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { User } from './user.entity';
 import { JwtModule } from '@nestjs/jwt';
+import { TransactionModule } from '../transaction/transaction.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
+    TransactionModule,
     JwtModule.register({
       secret: 'your-secret-key',
       signOptions: {
@@ -19,4 +21,4 @@ import { JwtModule } from '@nestjs/jwt';
   controllers: [UserController],
   exports: [UserService],
 })
-export class UserModule {}
+export class UserModule { }
