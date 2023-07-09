@@ -93,4 +93,20 @@ export class TransactionService {
 
     return totalDeposits - totalWithdrawals;
   }
+
+  async getUserBonus(userId: number): Promise<number> {
+    const bonusTransactions = await this.transactionRepository.find({
+      where: {
+        userId,
+        isBonus: true,
+      }
+    });
+
+    const totalBonus = bonusTransactions.reduce(
+      (total, transaction) => total + transaction.amount,
+      0,
+    );
+
+    return totalBonus;
+  }
 }
