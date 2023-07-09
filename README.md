@@ -46,7 +46,7 @@ yarn install</code></pre>
   <li>Run database migrations to create the necessary tables by executing the following command:</li>
 </ul>
 
-<pre><code>yarn typeorm migration:run</code></pre>
+<pre><code>sudo yarn migration:run</code></pre>
 
 <ol start="5">
   <li>Start the application:</li>
@@ -94,8 +94,8 @@ yarn install</code></pre>
 
 <p>The API integrates with a MySQL database using TypeORM. TypeORM manages the database schema and provides versioning capabilities. Database migrations are used to create the necessary tables and keep the schema up to date. If any changes are made to the entities, new migrations can be generated and applied using the following command:</p>
 
-<pre><code>yarn typeorm migration:generate -- -n MigrationName
-yarn typeorm migration:run</code></pre>
+<pre><code>sudo yarn migration:generate -- db/migrations/{MigrationName}
+sudo yarn migration:run</code></pre>
 
 <h2>Swagger Documentation</h2>
 
