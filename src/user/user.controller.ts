@@ -13,14 +13,19 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreateUserDto } from './user-create.dto';
 
+@ApiTags('Users')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
+  @ApiOperation({ summary: 'Register a new user' })
+  @ApiResponse({ status: 201, description: 'User registered.' })
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
-  async register(@Body() user: Partial<User>): Promise<User> {
+  async register(@Body() user: CreateUserDto): Promise<User> {
     return this.userService.register(user);
   }
 
