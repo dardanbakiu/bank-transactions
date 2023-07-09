@@ -8,13 +8,15 @@ import { dataSourceOptions } from 'db/data-source';
 import { TransactionController } from './transaction/transaction.controller';
 import { TransactionModule } from './transaction/transaction.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(dataSourceOptions),
     UserModule,
     TransactionModule,
-    AuthModule, // Add this to the array
+    AuthModule,
+    ConfigModule.forRoot(),
   ],
   controllers: [AppController, UserController, TransactionController],
   providers: [AppService],

@@ -11,7 +11,7 @@ import { TransactionModule } from '../transaction/transaction.module';
     TypeOrmModule.forFeature([User]),
     TransactionModule,
     JwtModule.register({
-      secret: 'your-secret-key',
+      secret: process.env.SECRET_KEY || 'default-secret',
       signOptions: {
         expiresIn: '2h',
       },
