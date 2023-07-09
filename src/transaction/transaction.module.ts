@@ -4,10 +4,16 @@ import { Transaction } from './transaction.entity';
 import { TransactionService } from './transaction.service';
 import { TransactionController } from './transaction.controller';
 import { User } from '../user/user.entity';
+// import { PassportModule } from '@nestjs/passport';
+// import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from '../auth/jwt.strategy';
+import { AuthModule } from 'src/auth/auth.module';
+
+// import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Transaction, User])],
-  providers: [TransactionService],
+  imports: [TypeOrmModule.forFeature([Transaction, User]), AuthModule],
+  providers: [TransactionService, JwtStrategy],
   controllers: [TransactionController],
   exports: [TransactionService],
 })
